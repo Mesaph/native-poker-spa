@@ -3,9 +3,7 @@ export const SEND_WEBSOCKET_MESSAGE = 'SEND_WEBSOCKET_MESSAGE';
 export const WEBSOCKET_MESSAGE_RECEIVED = 'WEBSOCKET_MESSAGE_RECEIVED';
 export const WEBSOCKET_DISCONNECTED = 'WEBSOCKET_DISCONNECTED';
 
-
 export const sendWebsocketMessage = message => ({ type: SEND_WEBSOCKET_MESSAGE, payload: message });
-
 
 export const transformWSMessagesToAction = reducer => (state, action) => {
   if (action && action.type === WEBSOCKET_MESSAGE_RECEIVED) {

@@ -1,19 +1,19 @@
 import { connect } from 'react-redux';
 import Application from '../components/Application';
 import {
-  selectProcessStatus,
-  selectVoteProgress,
-  selectEstimationResult,
+  getProcessStatus,
+  getVoteProgress,
+  getEstimationResult,
   startSession,
   createSession,
-  selectClientNames,
-  selectSessionName,
+  getClientNames,
+  getSessionName,
 } from '../ducks/sessionDuck';
 
 export default connect(state => ({
-  processStatusValue: selectProcessStatus(state),
-  voteProgress: selectVoteProgress(state),
-  estimationResult: selectEstimationResult(state),
-  participants: selectClientNames(state),
-  sessionName: selectSessionName(state),
+  processStatusValue: getProcessStatus(state),
+  voteProgress: getVoteProgress(state),
+  estimationResult: getEstimationResult(state),
+  participants: getClientNames(state),
+  sessionName: getSessionName(state),
 }), { startSession, createSession })(Application);

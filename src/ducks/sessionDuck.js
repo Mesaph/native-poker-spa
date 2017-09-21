@@ -23,11 +23,11 @@ export const UPDATE_VOTE_PROGRESS = 'UPDATE_VOTE_PROGRESS';
 // internal action types
 export const SET_SESSION_NAME = 'SET_SESSION_NAME';
 
-export const selectProcessStatus = state => state.session.processStatus;
-export const selectEstimationResult = state => state.session.estimationResult;
-export const selectClientNames = state => state.session.clientNames;
-export const selectSessionName = state => state.session.sessionName;
-export const selectVoteProgress = (state) => {
+export const getProcessStatus = state => state.session.processStatus;
+export const getEstimationResult = state => state.session.estimationResult;
+export const getClientNames = state => state.session.clientNames;
+export const getSessionName = state => state.session.sessionName;
+export const getVoteProgress = (state) => {
   const currentStep = state.session.numberOfVotes;
   const totalNumberOfSteps = state.session.clientNames.length;
   return {
