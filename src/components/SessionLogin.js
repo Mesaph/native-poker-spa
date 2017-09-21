@@ -1,82 +1,60 @@
-import React, {Component} from "react";
+import React, { Component } from 'react';
+import { Row, Col, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
 
+class SessionLogin extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      sessionName: '',
+    };
+    this.onSubmitLogin = this.onSubmitLogin.bind(this);
+    this.onChangeSessionName = this.onChangeSessionName.bind(this);
+  }
 
-class SessionLogin extends Component{
+  onSubmitLogin(event) {
+    event.preventDefault();
+    this.props.createSession(this.state.sessionName);
+  }
 
-    constructor(props){
-        super(props);
-        this.state = {
-            sessionName: "Christoph"
-        };
-        this.onSubmitLogin = this.onSubmitLogin.bind(this);
-        this.onChangeSessionName = this.onChangeSessionName.bind(this);
-        this.onClickStartSession = this.onClickStartSession.bind(this);
-    }
+  onChangeSessionName(event) {
+    this.setState({
+      sessionName: event.target.value,
+    });
+  }
 
-    onSubmitLogin(event) {
-        event.preventDefault();
-        this.props.createSession(this.state.sessionName);
-    }
-
-    onChangeSessionName(event) {
-        this.setState({
-            sessionName: event.target.value
-        });
-    }
-
-    onClickStartSession(event) {
-       this.props.startSession();
-    }
-
-    render(){
-
-
-        if(this.props.isVoteFinished){
-            return (
-                <div>
-                    Diskussion der Giganten:
-
-                    <ul>
-                        <li>
-                            {this.props.estimationResult.minEstimation.clientName} mit {this.props.estimationResult.minEstimation.value}
-                        </li>
-                        <li>
-                            {this.props.estimationResult.maxEstimation.clientName} mit {this.props.estimationResult.maxEstimation.value}
-
-                        </li>
-                    </ul>
-                    <button onClick={this.onClickStartSession}>
-                        Nächste Runde
-                    </button>
-                </div>
-            )
-        }
-
-        if(this.props.isSessionCreated){
-            return(
-                <div>
-                    <ul>
-                        {this.props.clientNames.map(clientName => (<li>{clientName}</li>))}
-                    </ul>
-                    <button onClick={this.onClickStartSession}>
-                        Session starten
-                    </button>
-                </div>
-            );
-        }
-
-        return (
-            <form onSubmit={this.onSubmitLogin}>
-                <input
-                    value={this.state.sessionName}
-                    onChange={this.onChangeSessionName}
-                />
-                <button type="submit">
-                    Session anlegen
-                </button>
-            </form>
-        );
-    }
-};
+  render() {
+    return (
+      <Row>
+        <Col xs={12} mdOffset={3} md={6}>
+          <form onSubmit={this.onSubmitLogin}>
+            <FormGroup
+              controlId="sessionName"
+            >
+              <ControlLabel>Name der Schätzrunde</ControlLabel>
+              <FormControl
+                type="text"
+                value={this.state.sessionName}
+                placeholder="Name der Schätzrunde"
+                onChange={this.onChangeSessionName}
+              />
+              <FormControl.Feedback />
+            </FormGroup>
+            <Row>
+              <Col xs={12} className={'text-center'}>
+                <Button
+                  type="submit"
+                  bsStyle="primary"
+                  disabled={this.state.sessionName.length < 1}
+                >
+                                    Schätzrunde anlegen
+                </Button>
+              </Col>
+            </Row>
+          </form>
+        </Col>
+      </Row>
+    );
+  }
+}
 
 export default SessionLogin;

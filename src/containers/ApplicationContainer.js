@@ -1,7 +1,19 @@
-import {connect} from "react-redux";
-import Application from "../components/Application";
+import { connect } from 'react-redux';
+import Application from '../components/Application';
 import {
-    selectIsConnected,
-} from "../ducks/websocketDuck";
+  selectProcessStatus,
+  selectVoteProgress,
+  selectEstimationResult,
+  startSession,
+  createSession,
+  selectClientNames,
+  selectSessionName,
+} from '../ducks/sessionDuck';
 
-export default connect((state)=>({isConnected: selectIsConnected(state)}),{})(Application);
+export default connect(state => ({
+  processStatusValue: selectProcessStatus(state),
+  voteProgress: selectVoteProgress(state),
+  estimationResult: selectEstimationResult(state),
+  participants: selectClientNames(state),
+  sessionName: selectSessionName(state),
+}), { startSession, createSession })(Application);
