@@ -66,9 +66,9 @@ const reducer = (state = DEFAULT_STATE, { type, payload }) => {
     case SESSION_CREATED:
       return { ...state, processStatus: processStatus.WAITING_FOR_PARTICIPANTS };
     case UPDATE_SESSION:
-      return { ...state, clientNames: payload.clientNames };
+      return { ...state, clientNames: payload.clientNames};
     case START:
-      return { ...state, processStatus: processStatus.VOTE_IN_PROGRESS };
+      return { ...state, processStatus: processStatus.VOTE_IN_PROGRESS,  numberOfVotes: 0 };
     case VOTE_FINSHED:
       return { ...state, estimationResult: payload, processStatus: processStatus.VOTE_FINISHED };
     case UPDATE_VOTE_PROGRESS :
